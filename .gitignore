@@ -1,0 +1,115 @@
+/////////////////////// DECLARACIÓN DE VARIABLES A UTILIZAR ///////////////////////////////7
+int A = 13;
+int B = 12;
+int C = 11;
+int D = 10;
+int contador = 0;
+int pulsador = 7;
+int unidades = 9;
+int decenas = 8;
+int cont_decena=0;
+int cont_unidad=0;
+void setup() {
+  // put your setup code here, to run once:
+//////////////////////// DECLARACIÓN DE PUERTOS DE ENTRADA Y SALIDA ///////////////////////
+  pinMode (A, OUTPUT);
+  pinMode (B, OUTPUT);
+  pinMode (C, OUTPUT);
+  pinMode (D, OUTPUT);
+  pinMode (unidades, OUTPUT);
+  pinMode (decenas, OUTPUT);
+  pinMode (pulsador, INPUT);
+}
+
+void loop() {
+if(digitalRead(pulsador)==HIGH){                         /// CONDICIÓN IF PARA EJECUTAR LA FUNCIÓN DE INCREMENTAR EL CONTADOR CADA VEZ QUE EL PULSO SEA POSITIVO  ////
+  if (contador < 99) {                                   /// DECLARACIÓN IF PARA DETERMINAR EL LIMITE HASTA DONDE LLEVARA EL CONTADOR //
+    contador++;                                          /// EL CONTADOR IRA INCREMENTANDO UNO X UNO ////
+      cont_decena = contador / 10;                       /// OBTENCIÓN DE LAS DECENAS PARA SU PRONTA GRAFICACIÓN EN EL DISPLAY ///
+      cont_unidad = contador - (cont_decena * 10);       /// ONTENCIÓN DE LAS UNIDADES //
+      digitalWrite(unidades,HIGH);                       // PONER EN ALTO EL DISPLAY DE UNIDADES PARA GRAFICAR LA UNIDAD RESPECTIVA /// 
+      digitalWrite(decenas,LOW);                         // PONER EL BAJO EL DISPLAY QUE NO VARIA POR EN EL MOMENTO DADO ////
+      dis(cont_unidad);                                  // LLAMAR AL METODO PARA IDENTIFICAR QUE VALOR LOS SEGMENTOS QUE SE VAN A ENCENDER DEL DISPLAY///
+      delay(200);                                        // RETARDO PARA OBSERVAR EL VALOR DEL DISPLAY ///
+      digitalWrite(unidades,LOW);                        // PONER EL BAJO LAS UNIDADES PARA CAMBIAR EL VALOR DE LAS DECENAS SEGUN SEA NECESARIO///
+      digitalWrite(decenas,HIGH);
+      dis(cont_decena);                                  // LLAMAR AL METODO PARA IDENTIFICAR QUE VALOR LOS SEGMENTOS QUE SE VAN A ENCENDER DEL DISPLAY///
+      delay(200);                                        // RETARDO//
+    }
+    else
+  {
+    contador = 0;                                         // CONDICIÓN ELSE PARA CUANDO EL CONTADOR SUPERA EL 99 SE VUELVA A REINICIAR ////
+  }
+}}
+void dis (int numero) {                                  // MÉTODO PARA ENCENDER LOS SEGMENTOS RESPECTIVOS CON UNA CONDICIÓN //
+  switch (numero) {                                     // COMANDO SWITCH CASE //
+    case 0:                                             /// VALORACIÓN DE DE CADA CASO DESDE LA GRAFICACIÓN DEL DECIMAL 0 A 9 //
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 1:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 2:
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 3:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 4:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 5:
+
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+
+    case 6:
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 7:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 8:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, HIGH);
+      break;
+
+    case 9:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, HIGH);
+      break;
+
+  }
+}
